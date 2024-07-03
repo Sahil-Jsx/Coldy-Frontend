@@ -1,0 +1,9 @@
+#root {
+  margin: 0 auto;
+  /* background-color: rgb(245, 245, 245); */
+}
+
+.css-7dv1rb-MuiButtonBase-root-MuiFab-root-MuiSpeedDial-fab {
+  color: #fefefe !important;
+  background-color: #eb6842 !important;
+}
