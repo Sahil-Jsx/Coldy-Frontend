@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
 import Components from "../../components/components";
 import Greetings from "../../components/greeting/greetings";
 import Speed_Dial from "../../components/speed-dial/speed-dial";
+import { get_dashboard } from "../../services/dashboard";
 
 const Dashboard = () => {
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 0,
+    }).format(value);
+  };
+
   const actions = [
     {
       icon: <Components.Icons.PeopleOutlineOutlined />,
@@ -26,6 +36,23 @@ const Dashboard = () => {
     },
   ];
 
+  const [dashboardData, setDashboardData] = useState({});
+
+  const getDashboard = () => {
+    get_dashboard()
+      .then((res) => {
+        console.log(res.data);
+        setDashboardData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDashboard();
+  }, []);
+
   return (
     <>
       <section className="m-3">
@@ -34,24 +61,6 @@ const Dashboard = () => {
           <Greetings />
         </div>
         <section>
-          <div className="grid grid-cols-2 gap-3 mt-5">
-            <Components.Card className="p-4">
-              <div>
-                <span className="font-semibold text-orange">This Year</span>
-                <div>
-                  <span>₹ 1,23,456</span>
-                </div>
-              </div>
-            </Components.Card>
-            <Components.Card className="p-4">
-              <div>
-                <span className="font-semibold text-orange">This Month</span>
-                <div>
-                  <span>₹ 5,750</span>
-                </div>
-              </div>
-            </Components.Card>
-          </div>
           <div className="grid grid-cols-2 gap-3 mt-5">
             <Components.Card className="p-4">
               <div>
@@ -65,7 +74,7 @@ const Dashboard = () => {
               <div>
                 <span className="font-semibold text-orange">Pending</span>
                 <div>
-                  <span>₹ 5,750</span>
+                  <span>{formatCurrency(dashboardData?.pending)}</span>
                 </div>
               </div>
             </Components.Card>

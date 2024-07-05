@@ -10,6 +10,16 @@ import toast from "react-hot-toast";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const [showFilter, setShowFilter] = useState(false);
+
+  const handleFilterBtn = () => {
+    setShowFilter(true);
+  };
+
+  const handleFilterClose = () => {
+    setShowFilter(false);
+  };
+
   const actions = [
     {
       icon: <Components.Icons.Add />,
@@ -65,7 +75,14 @@ const Orders = () => {
           <div>
             <span className="font-semibold text-xl">Orders</span>
           </div>
-          <div></div>
+          <div className="flex justify-end">
+            <button type="button" onClick={() => handleFilterBtn()}>
+              <Components.Icons.FilterAltRounded
+                className="text-orange"
+                style={{ fontSize: "32px" }}
+              />
+            </button>
+          </div>
         </div>
         {/* main section */}
         <section className="w-full">
@@ -161,6 +178,33 @@ const Orders = () => {
         <div>
           <Speed_Dial actions={actions} />
         </div>
+        {/* filter for orders */}
+        {showFilter && (
+          <Components.Dialog
+            open={showFilter}
+            onClose={() => handleFilterClose()}
+            fullWidth
+            maxWidth={"sm"}
+          >
+            <Components.DialogTitle>Order Filter</Components.DialogTitle>
+            <hr />
+            <Components.DialogContent>
+              <div className="row">
+                <Components.Autocomplete
+                  options={[]}
+                  renderInput={(params) => (
+                    <Components.TextField
+                      {...params}
+                      size="small"
+                      label="Customer Name"
+                      variant="outlined"
+                    />
+                  )}
+                />
+              </div>
+            </Components.DialogContent>
+          </Components.Dialog>
+        )}
       </section>
     </>
   );

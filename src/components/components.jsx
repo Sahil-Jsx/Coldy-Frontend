@@ -22,12 +22,20 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { BarChart } from "@mui/x-charts";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 const Components = {
   Box,
   BarChart,
+  Dialog,
   Radio,
+  DialogTitle,
   Card,
+  DialogContent,
   FormControlLabel,
+  DialogActions,
   RadioGroup,
   FormLabel,
   FormControl,
