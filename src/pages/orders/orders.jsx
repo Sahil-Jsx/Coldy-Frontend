@@ -75,14 +75,15 @@ const Orders = () => {
           <div>
             <span className="font-semibold text-xl">Orders</span>
           </div>
-          <div className="flex justify-end">
+          <div> </div>
+          {/* <div className="flex justify-end">
             <button type="button" onClick={() => handleFilterBtn()}>
               <Components.Icons.FilterAltRounded
                 className="text-orange"
                 style={{ fontSize: "32px" }}
               />
             </button>
-          </div>
+          </div> */}
         </div>
         {/* main section */}
         <section className="w-full">

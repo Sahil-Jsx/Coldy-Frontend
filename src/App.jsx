@@ -15,11 +15,41 @@ import { Toaster } from "react-hot-toast";
 import Edit_Place from "./pages/places/edit/edit-place";
 import Edit_Product from "./pages/products/edit/edit-product";
 import Edit_Orders from "./pages/orders/edit/edit-order";
+import Loader from "./components/loader/loader";
+import instance from "./services/token-interceptor";
+import { useEffect, useState } from "react";
+
 function App() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    //request interceptor
+    instance.interceptors.request.use(
+      (config) => {
+        setLoading(true);
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    //response interceptor
+    instance.interceptors.response.use(
+      (config) => {
+        setLoading(false);
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+  }, []);
+
   return (
     <>
       <div className="App">
         <BrowserRouter>
+          <Loader show={loading} />
           <Toaster />
           <Routes>
             <Route path="/" element={<Dashboard />} />
