@@ -24,14 +24,14 @@ const Login = () => {
 
     login(inputdata)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const token = res.data.token;
         localStorage.setItem("token", token);
         const expirationTime = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours in milliseconds
         localStorage.setItem("tokenExpiration", expirationTime);
         toast.success("Login Successfully !");
         navigate("/");
-        console.log(localStorage.getItem('tokenExpiration'));
+        // console.log(localStorage.getItem('tokenExpiration'));
       })
       .catch((err) => {
         console.log(err.response.data.error);

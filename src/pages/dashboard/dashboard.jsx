@@ -66,7 +66,12 @@ const Dashboard = () => {
               <div>
                 <span className="font-semibold text-orange">Today</span>
                 <div>
-                  <span>₹ 1,23,456</span>
+                  <span>
+                    {formatCurrency(dashboardData?.today_revenue)}&nbsp;-
+                    <span className="text-red-500">&nbsp;
+                      ({formatCurrency(dashboardData?.today_pending)}
+)                    </span>
+                  </span>
                 </div>
               </div>
             </Components.Card>
