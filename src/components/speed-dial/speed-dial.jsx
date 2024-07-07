@@ -18,7 +18,11 @@ const Speed_Dial = (props) => {
         <Components.Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
           <Components.SpeedDial
             ariaLabel="SpeedDial basic example"
-            sx={{ position: "absolute", bottom: 16, right: 16 }}
+            sx={{
+              position: "absolute",
+              bottom: 16,
+              right: 16,
+            }}
             icon={<Components.Icons.Menu />}
           >
             {props.actions.map((action, index) => (

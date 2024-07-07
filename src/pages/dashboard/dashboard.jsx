@@ -68,9 +68,9 @@ const Dashboard = () => {
                 <div>
                   <span>
                     {formatCurrency(dashboardData?.today_revenue)}&nbsp;-
-                    <span className="text-red-500">&nbsp;
-                      ({formatCurrency(dashboardData?.today_pending)}
-)                    </span>
+                    <span className="text-red-500">
+                      &nbsp; ({formatCurrency(dashboardData?.today_pending)}){" "}
+                    </span>
                   </span>
                 </div>
               </div>
