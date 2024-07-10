@@ -30,6 +30,7 @@ function App() {
       },
       (error) => {
         return Promise.reject(error);
+        setLoading(false);
       }
     );
 
@@ -41,6 +42,7 @@ function App() {
       },
       (error) => {
         return Promise.reject(error);
+        setLoading(false);
       }
     );
   }, []);
