@@ -29,6 +29,10 @@ const Orders = () => {
   ];
 
   const formatCurrency = (value) => {
+    if (!value) {
+      return "₹0";
+    }
+
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",

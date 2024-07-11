@@ -29,8 +29,8 @@ function App() {
         return config;
       },
       (error) => {
-        return Promise.reject(error);
         setLoading(false);
+        return Promise.reject(error);
       }
     );
 
@@ -41,8 +41,8 @@ function App() {
         return config;
       },
       (error) => {
-        return Promise.reject(error);
         setLoading(false);
+        return Promise.reject(error);
       }
     );
   }, []);

@@ -6,6 +6,7 @@ import { login } from "../../services/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -20,20 +21,19 @@ const Login = () => {
 
   const submitData = (inputdata, e) => {
     e.preventDefault();
-    // console.log(inputdata);
-
+    setLoading(true);
     login(inputdata)
       .then((res) => {
-        // console.log(res.data);
         const token = res.data.token;
         localStorage.setItem("token", token);
-        const expirationTime = new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours in milliseconds
+        setLoading(false);
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
         localStorage.setItem("tokenExpiration", expirationTime);
         toast.success("Login Successfully !");
         navigate("/");
-        // console.log(localStorage.getItem('tokenExpiration'));
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err.response.data.error);
         toast.error(err.response.data.error);
       });
@@ -75,7 +75,7 @@ const Login = () => {
                     InputProps={{
                       startAdornment: (
                         <Components.InputAdornment position="start">
-                          <Components.Icons.EmailRounded />
+                          <Components.Icons.PersonRounded />
                         </Components.InputAdornment>
                       ),
                     }}
@@ -114,14 +114,17 @@ const Login = () => {
                 </div>
                 {/* login button */}
                 <div className="mt-5">
-                  <Components.Button
-                    variant="contained"
+                  <Components.LoadingButton
                     color="error"
-                    type="submit"
                     className="w-full"
+                    type="submit"
+                    loading={loading}
+                    loadingPosition="center"
+                    // startIcon={<SaveIcon />}
+                    variant="contained"
                   >
-                    Login
-                  </Components.Button>
+                    <span>Login</span>
+                  </Components.LoadingButton>
                 </div>
               </div>
             </form>

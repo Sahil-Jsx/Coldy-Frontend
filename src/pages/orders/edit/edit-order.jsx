@@ -48,11 +48,16 @@ const Edit_Orders = () => {
   };
 
   const onQuantityChange = (index, productId, price, quantity) => {
+    console.log(quantity);
+
+    // Check if quantity is an empty string, if so, set it to 0
+    const sanitizedQuantity = quantity === "" ? 0 : parseInt(quantity, 10);
+
     const orderDetails = watch("order_details")?.map((product) => {
       if (product.product_id === productId) {
         return {
           ...product,
-          quantity: parseInt(quantity, 10),
+          quantity: sanitizedQuantity,
           price: price,
         };
       }
@@ -60,7 +65,7 @@ const Edit_Orders = () => {
     });
 
     setValue("order_details", orderDetails);
-
+    setValue("pending", 0);
     calculateTotal(orderDetails);
   };
 
@@ -72,6 +77,10 @@ const Edit_Orders = () => {
   };
 
   const formatCurrency = (value) => {
+    if (!value) {
+      return "₹0";
+    }
+
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
@@ -201,6 +210,10 @@ const Edit_Orders = () => {
                         product.product_price,
                         quantity
                       );
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    inputProps={{
+                      min: 0,
                     }}
                     InputProps={{
                       endAdornment: (

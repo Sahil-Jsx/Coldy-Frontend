@@ -6,6 +6,10 @@ import { get_dashboard } from "../../services/dashboard";
 
 const Dashboard = () => {
   const formatCurrency = (value) => {
+    if (!value) {
+      return "₹0";
+    }
+
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
@@ -41,7 +45,7 @@ const Dashboard = () => {
   const getDashboard = () => {
     get_dashboard()
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setDashboardData(res.data);
       })
       .catch((err) => {
@@ -57,11 +61,11 @@ const Dashboard = () => {
     <>
       <section className="m-3">
         <div>
-          <span className="font-semibold text-2xl">Hello, Admin</span>
-          <Greetings />
+          <span className="font-semibold text-2xl">Dashboard</span>
+          <Greetings /> 
         </div>
         <section>
-          <div className="grid grid-cols-2 gap-3 mt-5">
+          <div className="grid grid-cols-1 gap-3 mt-5">
             <Components.Card className="p-4">
               <div>
                 <span className="font-semibold text-orange">Today</span>
@@ -79,7 +83,10 @@ const Dashboard = () => {
               <div>
                 <span className="font-semibold text-orange">Pending</span>
                 <div>
-                  <span>{formatCurrency(dashboardData?.pending)}</span>
+                  <span>
+                    {formatCurrency(dashboardData?.pending)} -&nbsp;
+                    {dashboardData?.pending_orders} Orders
+                  </span>
                 </div>
               </div>
             </Components.Card>

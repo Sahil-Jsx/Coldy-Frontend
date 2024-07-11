@@ -35,8 +35,6 @@ const Add_Customer = () => {
   };
 
   const onSubmit = (inputdata) => {
-    console.log(inputdata);
-
     add_customer(inputdata)
       .then((res) => {
         toast.success("Customer Added Successfully");
