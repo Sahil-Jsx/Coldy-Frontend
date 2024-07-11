@@ -48,8 +48,6 @@ const Edit_Orders = () => {
   };
 
   const onQuantityChange = (index, productId, price, quantity) => {
-    console.log(quantity);
-
     // Check if quantity is an empty string, if so, set it to 0
     const sanitizedQuantity = quantity === "" ? 0 : parseInt(quantity, 10);
 
@@ -164,6 +162,7 @@ const Edit_Orders = () => {
               <div className="mt-1">
                 <Components.Autocomplete
                   options={customers}
+                  readOnly
                   getOptionLabel={(option) => option.customer_name}
                   value={
                     (customers &&

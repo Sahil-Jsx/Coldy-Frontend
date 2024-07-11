@@ -62,31 +62,43 @@ const Dashboard = () => {
       <section className="m-3">
         <div>
           <span className="font-semibold text-2xl">Dashboard</span>
-          <Greetings /> 
+          <Greetings />
         </div>
         <section>
-          <div className="grid grid-cols-1 gap-3 mt-5">
-            <Components.Card className="p-4">
+          <div className="grid grid-cols-2 gap-8 mt-5">
+            <Components.Card className="p-4" style={{ borderRadius: "15px" }}>
               <div>
-                <span className="font-semibold text-orange">Today</span>
-                <div>
-                  <span>
-                    {formatCurrency(dashboardData?.today_revenue)}&nbsp;-
-                    <span className="text-red-500">
-                      &nbsp; ({formatCurrency(dashboardData?.today_pending)}){" "}
-                    </span>
+                <div
+                  className="bg-orange w-fit p-3 rounded-2xl"
+                  style={{ color: "#fefefe" }}
+                >
+                  <Components.Icons.CalendarTodayOutlined fontSize="medium" />
+                </div>
+                <div className="mt-2">
+                  <span className="text-orange font-semibold text-lg">
+                    Today
                   </span>
+                </div>
+                <div>
+                  <span>{formatCurrency(dashboardData?.today_revenue)}</span>
                 </div>
               </div>
             </Components.Card>
-            <Components.Card className="p-4">
+            <Components.Card className="p-4" style={{ borderRadius: "15px" }}>
               <div>
-                <span className="font-semibold text-orange">Pending</span>
-                <div>
-                  <span>
-                    {formatCurrency(dashboardData?.pending)} -&nbsp;
-                    {dashboardData?.pending_orders} Orders
+                <div
+                  className="bg-orange w-fit p-3 rounded-2xl"
+                  style={{ color: "#fefefe" }}
+                >
+                  <Components.Icons.PendingActionsOutlined fontSize="medium" />
+                </div>
+                <div className="mt-2">
+                  <span className="text-orange font-semibold text-lg">
+                    Pending
                   </span>
+                </div>
+                <div>
+                  <span>{formatCurrency(dashboardData?.pending)}</span>
                 </div>
               </div>
             </Components.Card>
