@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import Components from "../../components/components";
 import Greetings from "../../components/greeting/greetings";
@@ -15,6 +16,16 @@ const Dashboard = () => {
       currency: "INR",
       minimumFractionDigits: 0,
     }).format(value);
+  };
+
+  // handle menu open and close
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const actions = [
@@ -39,6 +50,12 @@ const Dashboard = () => {
       path: "orders",
     },
   ];
+
+  const onLogout = () => {
+    handleClose();
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
 
   const [dashboardData, setDashboardData] = useState({});
 
@@ -67,15 +84,39 @@ const Dashboard = () => {
           </div>
           <div>
             <button
+              onClick={handleClick}
+              id="fade-button"
+              aria-controls={open ? "fade-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
               type="button"
               className="bg-background p-2 rounded-full flex justify-center items-center text-offwhite"
             >
               <Components.Icons.PermIdentityOutlined />
             </button>
+            <Components.Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Components.Fade}
+            >
+              <Components.MenuItem onClick={handleClose}>
+                <Components.Icons.AccountCircleOutlined className="text-orange" />
+                &nbsp;Profile
+              </Components.MenuItem>
+              <Components.MenuItem onClick={onLogout}>
+                <Components.Icons.LogoutOutlined className="text-orange" />
+                &nbsp;Logout
+              </Components.MenuItem>
+            </Components.Menu>
           </div>
         </div>
         <section>
-          <div className="grid grid-cols-2 gap-8 mt-5">
+          <div className="grid grid-cols-2 gap-8 mt-4">
             <Components.Card className="p-4" style={{ borderRadius: "15px" }}>
               <div>
                 <div
@@ -129,7 +170,13 @@ const Dashboard = () => {
                     categoryGapRatio: 0.5,
                   },
                 ]}
-                series={[{ data: [4, 3, 5, 5, 4, 3, 2] }]}
+                series={[
+                  {
+                    data: [4, 3, 5, 5, 4, 3, 2],
+                    label: "Revenue",
+                    color: "#fa8569",
+                  },
+                ]}
                 height={220}
               />
             </div>
