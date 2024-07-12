@@ -5,9 +5,10 @@ export default {
     extend: {
       colors: {
         background_light: "#EFF5F5",
-        background: "#FFAC96",
+        background: "#fa8569",
         orange: "#EB6440",
         dull: "#989898",
+        offwhite: "#fefefe",
       },
     },
   },
