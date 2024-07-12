@@ -106,11 +106,11 @@ const Dashboard = () => {
             >
               <Components.MenuItem onClick={handleClose}>
                 <Components.Icons.AccountCircleOutlined className="text-orange" />
-                &nbsp;Profile
+                &nbsp;&nbsp;Profile
               </Components.MenuItem>
               <Components.MenuItem onClick={onLogout}>
                 <Components.Icons.LogoutOutlined className="text-orange" />
-                &nbsp;Logout
+                &nbsp;&nbsp;Logout
               </Components.MenuItem>
             </Components.Menu>
           </div>
@@ -154,7 +154,7 @@ const Dashboard = () => {
               </div>
             </Components.Card>
           </div>
-          <Components.Card className=" mt-3" style={{ borderRadius: "15px" }}>
+          {/* <Components.Card className=" mt-3" style={{ borderRadius: "15px" }}>
             <div className="w-full">
               <Components.BarChart
                 className="w-full"
@@ -180,7 +180,7 @@ const Dashboard = () => {
                 height={220}
               />
             </div>
-          </Components.Card>
+          </Components.Card> */}
         </section>
         <div>
           <Speed_Dial actions={actions} />
