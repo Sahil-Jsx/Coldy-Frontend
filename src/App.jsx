@@ -18,6 +18,7 @@ import Edit_Orders from "./pages/orders/edit/edit-order";
 import Loader from "./components/loader/loader";
 import instance from "./services/token-interceptor";
 import { useEffect, useState } from "react";
+import Pending_Orders from "./pages/orders/pending/pending-orders";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -72,6 +73,7 @@ function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/add" element={<Add_Orders />} />
             <Route path="/orders/:id" element={<Edit_Orders />} />
+            <Route path="/pending" element={<Pending_Orders />} />
 
             {/* products */}
             <Route path="/products" element={<Products />} />

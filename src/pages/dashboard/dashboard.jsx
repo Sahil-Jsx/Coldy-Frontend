@@ -4,6 +4,7 @@ import Components from "../../components/components";
 import Greetings from "../../components/greeting/greetings";
 import Speed_Dial from "../../components/speed-dial/speed-dial";
 import { get_dashboard } from "../../services/dashboard";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const formatCurrency = (value) => {
@@ -58,7 +59,7 @@ const Dashboard = () => {
   };
 
   const [dashboardData, setDashboardData] = useState({});
-
+  const navigate = useNavigate();
   const getDashboard = () => {
     get_dashboard()
       .then((res) => {
@@ -116,7 +117,7 @@ const Dashboard = () => {
           </div>
         </div>
         <section>
-          <div className="grid grid-cols-2 gap-8 mt-4">
+          <div className="grid grid-cols-2 gap-5 mt-4">
             <Components.Card className="p-4" style={{ borderRadius: "15px" }}>
               <div>
                 <div
@@ -135,7 +136,11 @@ const Dashboard = () => {
                 </div>
               </div>
             </Components.Card>
-            <Components.Card className="p-4" style={{ borderRadius: "15px" }}>
+            <Components.Card
+              className="p-4"
+              style={{ borderRadius: "15px" }}
+              onClick={() => navigate("/pending")}
+            >
               <div>
                 <div
                   className="bg-background w-fit p-3 rounded-2xl"

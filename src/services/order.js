@@ -31,3 +31,7 @@ export const delete_order = (id) => {
 export const update_order = (id, data) => {
   return instance.patch(`/api/order/${id}`, data);
 };
+
+export const get_pending_orders = () => {
+  return instance.get(`/api/order/pending`);
+};
