@@ -10,8 +10,11 @@ import {
 } from "../../services/customer";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useDenounce } from "../../hooks/debounce/debounce";
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
+  const [search, setSearch] = useState(null);
+  const debouncedSearch = useDenounce(search);
 
   const actions = [
     {
@@ -44,6 +47,25 @@ const Customers = () => {
       });
   };
 
+  const searchCustomer = (value) => {
+    search_customer(value)
+      .then((res) => {
+        setCustomers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error searching customer");
+      });
+  };
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      searchCustomer(debouncedSearch);
+    } else {
+      getCustomers();
+    }
+  }, [debouncedSearch]);
+
   useEffect(() => {
     getCustomers();
   }, []);
@@ -69,15 +91,7 @@ const Customers = () => {
             placeholder="Search"
             onChange={(event) => {
               const value = event.target.value;
-              search_customer(value)
-                .then((res) => {
-                  console.log(res.data);
-                  setCustomers(res.data);
-                })
-                .catch((err) => {
-                  console.log(err);
-                  toast.error("Error searching customer");
-                });
+              setSearch(value);
             }}
           />
         </div>
