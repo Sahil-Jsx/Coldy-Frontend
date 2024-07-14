@@ -59,12 +59,30 @@ const Dashboard = () => {
   };
 
   const [dashboardData, setDashboardData] = useState({});
+  const [weekRevenueData, setWeekRevenueData] = useState([]);
   const navigate = useNavigate();
   const getDashboard = () => {
     get_dashboard()
       .then((res) => {
-        // console.log(res.data);
         setDashboardData(res.data);
+        const weeklyRevenue = res.data.weekly_revenue;
+
+        // Transforming the data for the bar chart
+        const weekDays = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const transformedData = weekDays.map(
+          (day) => weeklyRevenue[day].total_revenue
+        );
+
+        setWeekRevenueData(transformedData);
+        console.log(weekRevenueData);
       })
       .catch((err) => {
         console.log(err);
@@ -159,7 +177,7 @@ const Dashboard = () => {
               </div>
             </Components.Card>
           </div>
-          {/* <Components.Card className=" mt-3" style={{ borderRadius: "15px" }}>
+          <Components.Card className=" mt-3" style={{ borderRadius: "15px" }}>
             <div className="w-full">
               <Components.BarChart
                 className="w-full"
@@ -170,14 +188,14 @@ const Dashboard = () => {
                       colors: ["#fa8569"],
                     },
                     scaleType: "band",
-                    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                    data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
                     barGapRatio: 0.5,
                     categoryGapRatio: 0.5,
                   },
                 ]}
                 series={[
                   {
-                    data: [4, 3, 5, 5, 4, 3, 2],
+                    data: weekRevenueData,
                     label: "Revenue",
                     color: "#fa8569",
                   },
@@ -185,7 +203,7 @@ const Dashboard = () => {
                 height={220}
               />
             </div>
-          </Components.Card> */}
+          </Components.Card>
         </section>
         <div>
           <Speed_Dial actions={actions} />

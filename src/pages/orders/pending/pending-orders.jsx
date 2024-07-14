@@ -7,7 +7,17 @@ import { get_pending_orders } from "../../../services/order";
 import UserIcon from "@svg/user";
 function Pending_Orders() {
   const [pendingOrders, setPendingOrders] = useState([]);
+  const formatCurrency = (value) => {
+    if (!value) {
+      return "₹0";
+    }
 
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 0,
+    }).format(value);
+  };
   const getPendingOrders = () => {
     get_pending_orders()
       .then((res) => {
@@ -73,29 +83,37 @@ function Pending_Orders() {
                       <p>{row?.pending_orders.length}</p>
                       <p className="font-semibold mt-2">Total Amount</p>
                       <p>
-                        {row.pending_orders.reduce(
-                          (acc, curr) => acc + curr.total_amount,
-                          0
+                        {formatCurrency(
+                          row.pending_orders.reduce(
+                            (acc, curr) => acc + curr.total_amount,
+                            0
+                          )
                         )}
-                         &nbsp;
+                        &nbsp;
                         <span className="text-green-700">
-                          (+{row?.pending_orders &&
-                            row.pending_orders.reduce(
-                              (acc, curr) => acc + curr.total_amount,
-                              0
-                            ) -
+                          (+
+                          {formatCurrency(
+                            row?.pending_orders &&
                               row.pending_orders.reduce(
-                                (acc, curr) => acc + curr.pending,
+                                (acc, curr) => acc + curr.total_amount,
                                 0
-                              )})
+                              ) -
+                                row.pending_orders.reduce(
+                                  (acc, curr) => acc + curr.pending,
+                                  0
+                                )
+                          )}
+                          )
                         </span>
                       </p>
 
                       <p className="font-semibold mt-2">Total Pending</p>
                       <p>
-                        {row?.pending_orders.reduce(
-                          (acc, curr) => acc + curr.pending,
-                          0
+                        {formatCurrency(
+                          row?.pending_orders.reduce(
+                            (acc, curr) => acc + curr.pending,
+                            0
+                          )
                         )}
                       </p>
                     </div>
