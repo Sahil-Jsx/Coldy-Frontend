@@ -26,9 +26,15 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
 const Components = {
   Box,
+  Menu,
+  MenuItem,
+  Fade,
   BarChart,
   Dialog,
   LoadingButton,

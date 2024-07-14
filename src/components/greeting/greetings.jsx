@@ -34,8 +34,8 @@ const Greetings = () => {
 
   return (
     <div className="flex justify-between items-center">
-      <span className="font-bold text-md text-dull">{greeting}</span>
-      <span className="text-sm text-black-500">{currentDate}</span>
+      {/* <span className="font-bold text-md text-dull">{greeting}</span>/ */}
+      <span className="text-md text-orange font-semibold">{currentDate}</span>
     </div>
   );
 };
