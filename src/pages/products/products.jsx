@@ -92,12 +92,12 @@ const Products = () => {
         </div>
         {/* main section */}
         <section className="w-full">
-          <div className="pb-20">
+          <div className="pb-20 mt-5">
             {products.length === 0 ? (
               <p className="text-center mt-5">No Products found.</p>
             ) : (
               products.map((product, index) => (
-                <Components.Accordion key={index} className="my-5">
+                <Components.Accordion key={index} className="mb-3">
                   <Components.AccordionSummary
                     expandIcon={<Components.Icons.KeyboardArrowDownRounded />}
                   >
