@@ -80,12 +80,12 @@ const Places = () => {
         </div>
         {/* main section */}
         <section className="w-full">
-          <div className="pb-20">
+          <div className="pb-20 mt-5">
             {locations.length === 0 ? (
               <p className="text-center mt-5">No locations available</p>
             ) : (
               locations.map((row, index) => (
-                <Components.Accordion key={index} className="my-5">
+                <Components.Accordion key={index} className="mb-3">
                   <Components.AccordionSummary
                     expandIcon={<Components.Icons.KeyboardArrowDownRounded />}
                   >

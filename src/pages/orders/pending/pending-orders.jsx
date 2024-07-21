@@ -7,6 +7,7 @@ import { get_pending_orders } from "../../../services/order";
 import UserIcon from "@svg/user";
 function Pending_Orders() {
   const [pendingOrders, setPendingOrders] = useState([]);
+  const navigate = useNavigate();
   const formatCurrency = (value) => {
     if (!value) {
       return "₹0";
@@ -108,6 +109,7 @@ function Pending_Orders() {
                       </p>
 
                       <p className="font-semibold mt-2">Total Pending</p>
+                      {console.log(row)}
                       <p>
                         {formatCurrency(
                           row?.pending_orders.reduce(
@@ -116,6 +118,18 @@ function Pending_Orders() {
                           )
                         )}
                       </p>
+                    </div>
+                    <div className="font-semibold text-center">Orders</div>
+                    <hr className="my-2" />
+                    <div className="grid grid-cols-2">
+                      {row?.pending_orders.map((item, index) => (
+                        <div
+                          className="bg-background me-2 p-1 text-offwhite rounded-full text-center"
+                          onClick={() => navigate(`/orders/${item?._id}`)}
+                        >
+                          {item.order_no}
+                        </div>
+                      ))}
                     </div>
                   </Components.AccordionDetails>
                   {/* <hr /> */}
